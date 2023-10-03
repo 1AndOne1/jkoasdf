@@ -14,15 +14,13 @@ class SinglyLinkedList {
     addFront(value) {
         const newNode = new Node(value);
 
-        if (this.head === null) {
+        if (this.tail === null) {
             newNode.next = newNode;
-            this.head = newNode;
             this.tail = newNode;
           } 
           else {
-            newNode.next = this.head;
+            this.tail.next = newNode;
             this.head = newNode;
-            this.tail.next = this.head;
           }
     }
     first() {
@@ -42,20 +40,19 @@ class SinglyLinkedList {
     }
 
     addBack(value) {
-        const newNode = new Node(value);
-    
-        if (this.head === null) {
-          newNode.next = newNode;
-          this.head = newNode;
-          this.tail = newNode;
-        } else {
-          newNode.next = this.head.next;
-          this.head.next = newNode;
-          if (this.head === this.tail) {
-            this.tail = newNode;
-          }
+      const newNode = new Node(value);
+  
+      if (this.head === null) {
+        newNode.next = newNode;
+        this.head = newNode;
+        this.tail = newNode;
+      } else {
+        newNode.next = this.head.next;
+        this.head.next = newNode;
+        if (this.head === this.tail) {
         }
       }
+    }
 
     deleteBack() {
         if (this.head === null) {
