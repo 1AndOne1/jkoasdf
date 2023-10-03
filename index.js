@@ -15,12 +15,21 @@ class SinglyLinkedList {
         const newNode = new Node(value);
 
         if (this.head === null) {
+            newNode.next = newNode;
             this.head = newNode;
             this.tail = newNode;
-        } else {
+          } 
+          else {
             newNode.next = this.head;
             this.head = newNode;
-        }
+            this.tail.next = this.head;
+          }
+    }
+    first() {
+        return this.tail.next;
+    }
+    last() {
+        return this.tail;
     }
 
     deleteFront() {
@@ -34,15 +43,19 @@ class SinglyLinkedList {
 
     addBack(value) {
         const newNode = new Node(value);
-
+    
         if (this.head === null) {
-            this.head = newNode;
-            this.tail = newNode;
+          newNode.next = newNode;
+          this.head = newNode;
+          this.tail = newNode;
         } else {
-            this.tail.next = newNode;
+          newNode.next = this.head.next;
+          this.head.next = newNode;
+          if (this.head === this.tail) {
             this.tail = newNode;
+          }
         }
-    }
+      }
 
     deleteBack() {
         if (this.head === null) {
@@ -84,11 +97,6 @@ class SinglyLinkedList {
             elements.push(resCur);
             current = current.next;
         }
-        while (prev !== null) {
-            let resPrev = prev.value
-            elements.push(resPrev);
-            prev = prev.next;
-        }
 
         console.log(elements.join(" - "));
     }
@@ -96,9 +104,11 @@ class SinglyLinkedList {
 
 const list = new SinglyLinkedList();
 list.addFront(1);
-list.addBack(4);
-list.addFront(5);
+list.addBack(2);
 list.addFront(3);
-list.addBack(9);
+list.addFront(11);
+list.addBack(33);
 list.print();
 console.log(list.getValueByIndex(1));
+console.log(list.first())
+console.log(list.last())
